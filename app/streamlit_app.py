@@ -256,7 +256,7 @@ try:
                     """, unsafe_allow_html=True)
 
         # --- TAB 2: ANALYSIS ---
-        with tab_2:
+        with tab2:
             st.markdown("<br>", unsafe_allow_html=True)
             # Monochrome Analytics
             fig = px.scatter(df, x="sqft", y="sale_price", color_discrete_sequence=["#FFFFFF"], opacity=0.3, template="plotly_dark")
