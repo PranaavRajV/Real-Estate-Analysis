@@ -1,0 +1,32 @@
+project_name: "Real Estate Market Trends Predictor"
+version: "1.0.0"
+
+paths:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  external_data_path: "data/external/"
+  model_path: "models/"
+  figures_path: "reports/figures/"
+
+dataset:
+  target_column: "sale_price"
+  test_size: 0.2
+  random_state: 42
+  time_column: "date"
+
+modeling:
+  xgboost:
+    n_estimators: 1000
+    learning_rate: 0.05
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+  prophet:
+    yearly_seasonality: true
+    weekly_seasonality: true
+    daily_seasonality: false
+    changepoint_prior_scale: 0.05
+
+analysis:
+  top_features_n: 15
+  correlation_threshold: 0.8
