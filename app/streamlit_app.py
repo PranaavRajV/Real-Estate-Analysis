@@ -172,10 +172,6 @@ try:
         st.markdown("""
             <div style='display: flex; justify-content: space-between; align-items: flex-end;'>
                 <h1>EQUITY <span style='font-weight: 200;'>TERM.</span></h1>
-                <div style='text-align: right; color: #666; font-size: 0.8rem;'>
-                    STATUS: OPERATIONAL // VERSION 2.0.0<br>
-                    PORT: 8501 // DATABASE: RESIDENTIAL_VAL_01
-                </div>
             </div>
             <hr style='border-top: 1px solid #333; margin-bottom: 50px;'>
         """, unsafe_allow_html=True)
