@@ -290,4 +290,4 @@ except Exception as e:
     st.error(f"ENGINE ERROR: {e}")
 
 # --- FOOTER ---
-st.markdown("<br><br><br><br><center style='font-size: 0.6rem; color: #333; letter-spacing: 5px;'>DESIGNED BY P.RAJ V // OPTIMIZED FOR HIGH-LATENCY ENVIRONMENTS</center>", unsafe_allow_html=True)
+st.markdown("<br><br><br><br><center style='font-size: 0.8rem; color: #666; letter-spacing: 2px;'>. Pranaav Raj V</center>", unsafe_allow_html=True)
