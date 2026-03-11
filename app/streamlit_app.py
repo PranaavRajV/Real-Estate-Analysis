@@ -152,21 +152,31 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- LOADING ENGINE ---
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "best_model.pkl")
-DATA_PATH = os.path.join(BASE_DIR, "data", "processed", "features.csv")
-FORECAST_PATH = os.path.join(BASE_DIR, "data", "processed", "forecast.csv")
+# Streamlit Cloud environment pathing
+ROOT_DIR = os.getcwd()
+MODEL_PATH = os.path.join(ROOT_DIR, "models", "best_model.pkl")
+DATA_PATH = os.path.join(ROOT_DIR, "data", "processed", "features.csv")
+FORECAST_PATH = os.path.join(ROOT_DIR, "data", "processed", "forecast.csv")
 
 @st.cache_resource
 def load_assets():
-    if not os.path.exists(MODEL_PATH): return None, None, None
-    return joblib.load(MODEL_PATH), pd.read_csv(DATA_PATH), pd.read_csv(FORECAST_PATH)
+    try:
+        if not os.path.exists(MODEL_PATH):
+            return None, None, None, f"Missing: {MODEL_PATH}"
+        m = joblib.load(MODEL_PATH)
+        d = pd.read_csv(DATA_PATH)
+        f = pd.read_csv(FORECAST_PATH)
+        return m, d, f, None
+    except Exception as e:
+        return None, None, None, str(e)
 
 try:
-    model, df, df_forecast = load_assets()
+    model, df, df_forecast, err_msg = load_assets()
     
     if model is None:
-        st.error("SYSTEM OFFLINE: Artifacts missing.")
+        st.error(f"SYSTEM OFFLINE: {err_msg}")
+        st.info("Debugging: Current directory is " + os.getcwd())
+        st.write("Files in models/:", os.listdir(os.path.join(ROOT_DIR, "models")) if os.path.exists(os.path.join(ROOT_DIR, "models")) else "None")
     else:
         # --- HEADER ---
         st.markdown("""
